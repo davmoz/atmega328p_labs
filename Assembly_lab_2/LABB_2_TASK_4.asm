@@ -8,21 +8,21 @@
 ;
 ;   Lab number: 2
 ;
-;   Title: 
+;   Title:
 ;        Task 4, Delay subroutine with variable delay time
-;    
-;   Hardware: 
+;
+;   Hardware:
 ;        Arduino UNO rev 3, CPU ATmega328p
 ;
-;   Function: 
+;   Function:
 ;        Change delay time in a ring counter using a register pair.
 ;
 ;   Input ports: None.
 ;
-;   Output ports: 
+;   Output ports:
 ;        LEDs connected to digital pin 8-13, PORTB.
 ;
-;    Subroutines: 
+;    Subroutines:
 ;         reset				   -> Resets the ringcounter so it starts over when all LEDs have been lit.
 ;         delay_milliseconds   -> Compare if the counter have reached the same value as the register pair.
 ;         delay                -> 0.001 second delay between each LED manipulation
@@ -33,7 +33,7 @@
 ; <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 ; Initialize Stack Pointer
-ldi r20, HIGH(RAMEND)        ; R20 = high part of RAMEND adress
+ldi r20, HIGH(RAMEND)       ; R20 = high part of RAMEND adress
 OUT SPH, R20                ; SPH = high part of Stack Pointer
 ldi R20, low(RAMEND)        ; R20 = low part of RAMEND adress
 out SPL, R20                ; SPL = low part of Stack Pointer
@@ -41,7 +41,7 @@ out SPL, R20                ; SPL = low part of Stack Pointer
 
 ldi r16, 0xff
 out DDRB, r16
-ldi r16, 0b0000_0001     
+ldi r16, 0b0000_0001
 
 ; millisecond input goes into register pair r25:r24
 ldi r25, 0x00				; High end in register pair
@@ -53,11 +53,11 @@ ldi r26, 0x00				; Counter for low register pair.
 
 
 ring_counter:
-    out PORTB, r16                  
+    out PORTB, r16
     cpi r16, 0b0100_0000
     brge reset
     lsl r16
-    rcall wait_milliseconds     
+    rcall wait_milliseconds
     rjmp ring_counter
 
 

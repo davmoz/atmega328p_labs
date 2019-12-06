@@ -8,22 +8,22 @@
 ;
 ;   Lab number: 2
 ;
-;   Title: 
+;   Title:
 ;        Task 1, Switch - Ring counter / Johnson counter
-;    
-;   Hardware: 
+;
+;   Hardware:
 ;        Arduino UNO rev 3, CPU ATmega328p
 ;
-;   Function: 
-;			Initially runs Johnson counter, then changes to ring counter when switch is pressed and 
+;   Function:
+;			Initially runs Johnson counter, then changes to ring counter when switch is pressed and
 ;			continues switching between the two each time the switch is pressed.
 ;
 ;   Input ports: PORT D, PIN2.
 ;
-;   Output ports: 
+;   Output ports:
 ;        LEDs connected to digital pin 8-13, PORTB.
 ;
-;    Subroutines: 
+;    Subroutines:
 ;		ring_counter		-> Runs ring counter
 ;		reset_ring_counter	-> Resets the counter in ring counter
 ;		johnson_counter_inc	-> Runs Johnson counter
@@ -42,7 +42,7 @@
 ; <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 ; Initialize Stack Pointer
-ldi r20, HIGH(RAMEND)        ; R20 = high part of RAMEND adress
+ldi r20, HIGH(RAMEND)       ; R20 = high part of RAMEND adress
 OUT SPH, R20                ; SPH = high part of Stack Pointer
 ldi R20, low(RAMEND)        ; R20 = low part of RAMEND adress
 out SPL, R20                ; SPL = low part of Stack Pointer
@@ -105,14 +105,14 @@ toggle_flag:
 	rcall set_low
 	reti
 
-set_low: 
+set_low:
 	rcall switch_delay
 	ldi r23, 0x00
 	ldi r16, 0b0000_0000
 	ldi r17, 0b0000_0001
 	jmp ring_counter
 
-set_high: 
+set_high:
 	rcall switch_delay
 	ldi r23, 0xff
 	ldi r16, 0b0000_0000

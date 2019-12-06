@@ -8,21 +8,21 @@
 ;
 ;   Lab number: 2
 ;
-;   Title: 
+;   Title:
 ;        Task 2, Electronic dice
-;    
-;   Hardware: 
+;
+;   Hardware:
 ;        Arduino UNO rev 3, CPU ATmega328p
 ;
-;   Function: 
+;   Function:
 ;			Displays "random" dice result when switch is released
 ;
 ;   Input ports: PORT D, PIN3.
 ;
-;   Output ports: 
+;   Output ports:
 ;        LEDs connected to digital pin 8-13, PORTB.
 ;
-;    Subroutines: 
+;    Subroutines:
 ;		switch_pressed	-> Keeps calling the randomize subroutine while the switch is pressed and
 ;						jumps back to main to display the results when the switch is released.
 ;		randomize		-> Keeps shifting the traverser and resets it when its value passes 0b1000_0000.
@@ -65,16 +65,16 @@ switch_pressed:
 	andi r18, 0b0000_1000
 	cpi r18, 0b0000_1000	; Check if switch pin 3 is high (pressed)
 	breq randomize
-	rcall main				; Jump back to main if switch is not pressed (show dice result)
+	rcall main				    ; Jump back to main if switch is not pressed (show dice result)
 
-randomize: 
+randomize:
 	add r16, r17
 	lsl r17
 	cpi r17, 0b1000_0000
 	breq reset
 	rjmp switch_pressed
 
-reset: 
+reset:
 	ldi r16, 0b0000_0001
 	ldi r17, 0b0000_0010
 	rjmp switch_pressed

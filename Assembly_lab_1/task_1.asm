@@ -8,20 +8,20 @@
 ;
 ;   Lab number: 1
 ;
-;   Title: 
+;   Title:
 ;		Task 1, A bare minimum program to ligh LED 2 on the board
-;    
-;   Hardware: 
+;
+;   Hardware:
 ;		Arduino UNO rev 3, CPU ATmega328p
 ;
-;   Function: 
+;   Function:
 ;		Lights up LED connected to pin 11 on board
-;		
 ;
-;   Input ports: 
+;
+;   Input ports:
 ;		None
 ;
-;   Output ports: 
+;   Output ports:
 ;		PORTB, Digital pin 10
 ;
 ;	Subroutines: None.
@@ -32,6 +32,6 @@
 ; <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
-	ldi r16, 0b0000_0100	;
-	out DDRB, r16			; Setting Data Direction Register
-	out PORTB, r16			; Write to PORTB
+	ldi r16, 0b0000_0100
+	out DDRB, r16			   ; Setting Data Direction Register
+	out PORTB, r16			 ; Write to PORTB

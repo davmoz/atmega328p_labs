@@ -1,6 +1,6 @@
 ; >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ;   1DT301, Computer Technology 1
-;   Date: 2019-10-10	
+;   Date: 2019-10-10
 ;
 ;   Author:
 ;        David Mozart
@@ -8,21 +8,21 @@
 ;
 ;   Lab number: 4
 ;
-;   Title: 
+;   Title:
 ;        Task 5, Serial communication using interrupt
-;    
-;   Hardware: 
+;
+;   Hardware:
 ;        Arduino UNO rev 3, CPU ATmega328p
 ;
-;   Function: 
-;			Serial communication using interrupt	
+;   Function:
+;			Serial communication using interrupt
 ;
 ;   Input ports: none
 ;
-;   Output ports: 
+;   Output ports:
 ;        LEDs connected to digital pin 8-13, PORTB.
 ;
-;    Subroutines: 
+;    Subroutines:
 ;		get_char:			-> read character in UDR
 ;		port_output:		-> write character to PORTB
 ;		put_char:			-> write character to UDR0
@@ -53,28 +53,28 @@ start:
 	ldi temp, low(RAMEND)        ; r17 = low part of RAMEND adress
 	out SPL, temp                ; SPL = low part of Stack Pointer
 
-	ldi temp, 0xFF				; portB outputs
+	ldi temp, 0xFF				       ; portB outputs
 	out DDRB, temp
-	ldi temp, 0x55				; initial value to outputs
+	ldi temp, 0x55				       ; initial value to outputs
 	out PORTB, temp
 
-	ldi temp, UBRR_val			; store Prescaler value in UBRR0L
+	ldi temp, UBRR_val		     	 ; store Prescaler value in UBRR0L
 	sts UBRR0L, temp
-	ldi temp, 0b1001_1000		; RXCIE = 1, RXEN = 1, TXEN = 1
+	ldi temp, 0b1001_1000		     ; RXCIE = 1, RXEN = 1, TXEN = 1
 	sts UCSR0B, temp
-	sei							; set global interrupt flag
+	sei							             ; set global interrupt flag
 
 nop_loop:
 	nop
 	rjmp nop_loop
 
 get_char:
-	lds char, UDR0				; read character in UDR
+	lds char, UDR0				      ; read character in UDR
 
 /* This is for task 3, only works with 6 LEDs tho*/
 	port_output:
-	out PORTB, char			; write character to PORTB
+	out PORTB, char			        ; write character to PORTB
 
-put_char:			
-	sts UDR0, char				; write character to UDR0
+put_char:
+	sts UDR0, char				      ; write character to UDR0
 	reti
